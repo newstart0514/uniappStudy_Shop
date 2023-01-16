@@ -1,6 +1,6 @@
 {
 	"tabBar": {
-		"selectedColor": "#C00000",
+		"selectedColor": "#fba414",
 		"list": [{
 				"pagePath": "pages/home/home",
 				"text": "首页",
@@ -11,7 +11,7 @@
 				"pagePath": "pages/cate/cate",
 				"text": "分类",
 				"iconPath": "static/tab_icons/cate.png",
-				"selectedIconPath": "static/tab_icons/cart-active.png"
+				"selectedIconPath": "static/tab_icons/cate-active.png"
 			},
 			{
 				"pagePath": "pages/cart/cart",
@@ -78,7 +78,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "幽离优选",
-		"navigationBarBackgroundColor": "#C00000",
+		"navigationBarBackgroundColor": "#fba414",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"
