@@ -1,8 +1,13 @@
 <template>
 	<view>
+		<!-- 使用自定义的搜索组件 -->
+		<!-- <my-search :backgroudColor="'#fba414'" :radius="30"></my-search> -->
+		<!-- 向子组件传递自定义事件 -->
+		<my-search @myClick="goToSearchPage"></my-search>
+
 		<view class="scrollViewContainer">
 			<!-- 左侧滑动区 -->
-			<scroll-view scroll-y="true" :style="{height: screenHeight + 'px'}" class="leftScrollView">
+			<scroll-view scroll-y="true" :style="{height: screenHeight - 50 + 'px'}" class="leftScrollView">
 				<block v-for="(item, i) in cateList" :key="i">
 					<!-- 一级分类列表 -->
 					<view :class="['leftScrollViewItem', i === active ? 'active' : '']" @click="updateActive(i)">
@@ -11,13 +16,15 @@
 				</block>
 			</scroll-view>
 			<!-- 右侧滑动区 -->
-			<scroll-view scroll-y="true" :style="{height: screenHeight + 'px'}" class="rightScrollView" :scroll-top="scrollTop">
+			<scroll-view scroll-y="true" :style="{height: screenHeight - 50 + 'px'}" class="rightScrollView"
+				:scroll-top="scrollTop">
 				<view class="cateLv2" v-for="(item2, i2) in cateLevel2" :key="i2">
 					<!-- 二级分类标题 -->
 					<view class="cateLv2Title">/ {{item2.cat_name}} /</view>
 					<!-- 动态渲染三级分类 -->
 					<view class="cateLv3List">
-						<view class="cateLv3Item" v-for="(item3, i3) in item2.children" :key="i3" @click="goToGoodsList(item3)">
+						<view class="cateLv3Item" v-for="(item3, i3) in item2.children" :key="i3"
+							@click="goToGoodsList(item3)">
 							<!-- 图片 -->
 							<image :src="item3.cat_icon"></image>
 							<!-- 文本 -->
@@ -79,6 +86,12 @@
 				uni.navigateTo({
 					url: `/subpkg/goods_list/goods_list?cid=${item.cat_id}`
 				})
+			},
+			// 搜索框点击事件
+			goToSearchPage() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 		}
 	}
@@ -127,10 +140,11 @@
 					text-align: center;
 					padding: 15px 0;
 				}
+
 				.cateLv3List {
 					display: flex;
 					flex-wrap: wrap;
-					
+
 					.cateLv3Item {
 						width: 33.3%;
 						display: flex;
@@ -138,12 +152,12 @@
 						justify-content: center;
 						align-items: center;
 						margin-bottom: 10px;
-						
+
 						image {
 							width: 60px;
 							height: 60px;
 						}
-						
+
 						text {
 							font-size: 12px;
 						}
