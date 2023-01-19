@@ -7,10 +7,16 @@ import store from '@/store/store.js'
 // 导入网络请求的包
 import { $http } from '@escook/request-miniprogram'
 uni.$http = $http
-$http.beforeRequest = function() {
+$http.beforeRequest = function(options) {
 	uni.showLoading({
 		title: '数据加载中...'
 	})
+	// 判断当前是否请求有权限的接口
+	if(options.url.indexOf('/my') !== -1) {
+		options.header = {
+			Authorization: store.state.m_user.token
+		}
+	}
 }
 $http.afterRequest = function(options) {
 	uni.hideLoading()
